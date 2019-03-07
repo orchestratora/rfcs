@@ -37,3 +37,7 @@ via `ConfigurationService`.
 
 None
 
+## Links
+
+- Migrated from [#20](https://github.com/orchestratora/orchestrator/issues/20)
+- Implemented in [#21](https://github.com/orchestratora/orchestrator/pull/21)
