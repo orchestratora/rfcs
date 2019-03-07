@@ -22,17 +22,17 @@ I suggest that in order to complete this as fast a possible, we integrate these 
 
 The flat layout should wrap `n` amount of `OrchestratorConfigItem` instances and emit an event when all the instances have been rendered.
 
-Consider this as a default config (note that these configurations can be overwritten with `Input`s)
+Configuration for `LayoutFlatComponent`:
 
 ```typescript
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class LayoutFlatComponentConfig {
-  direction = 'row';
-  wrap = 'wrap';
-  align = 'space-between center';
-  columns = 3;
+export class LayoutFlatConfig {
+  wrap: string;
+  direction: string;
+  alignItems: string;
+  alignContent: string;
 }
 ```
 
