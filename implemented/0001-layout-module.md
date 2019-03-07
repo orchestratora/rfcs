@@ -43,5 +43,7 @@ should have an event emitter for when the items are rendered and an even emitter
 
 None
 
-> Migrated from #8
-> Implemented in #17
+## Links
+
+- Migrated from [#8](https://github.com/orchestratora/orchestrator/issues/8)
+- Implemented in [#17](https://github.com/orchestratora/orchestrator/pull/17)
