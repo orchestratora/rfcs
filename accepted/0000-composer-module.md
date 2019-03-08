@@ -69,6 +69,52 @@ Create module `ComposerModule` that will declare and export components:
 - `ComposerCanvasComponent`
 - `ComposerPreviewComponent`
 
+Create private components for internal use:
+
+- `ComposerConfiguratorComponent` - should be used to render configuration controls for specific dynamic component
+- `ComposerDroppableComponent` - should be used to accept dragged dynamic components. It will be rendered in empty slots of configuration component and last element in items
+
+Communication between components may happen via inputs/outputs as well as via parent `ComposerComponent`.
+
+Any errors during live preview of configuration must be rendered in toast.
+
+### `ComposerComponent`
+
+- Selector: `orc-composer`
+- Will render `ComposerComponentsComponent`, `ComposerCanvasComponent` and `ComposerPreviewComponent` by default
+- Or will accept projected template with those components for custom layout
+
+### `ComposerComponentsComponent`
+
+- Selector: `orc-composer-components`
+- Will render a list of all currently available dynamic components ready for drag-n-dropping
+
+### `ComposerCanvasComponent`
+
+- Selector: `orc-composer-canvas`
+- Will render area for dropping components from `ComposerComponentsComponent` and configure them in the modal window
+- It should render `RenderItemComponent` inside with `ComposerDroppableComponent` in appropriate places
+- When configuration is updated it should rearrange position of `ComposerDroppableComponent`
+
+### `ComposerPreviewComponent`
+
+- Selector: `orc-composer-preview`
+- It will render current json configuration via `orc-orchestrator`
+
+### `ComposerConfiguratorComponent`
+
+- Selector: `orc-composer-configurator`
+- It will render configuration controls for dynamic component provided from DI token `CONFIGURATION_COMPONENT`
+- When user updates configuration it should emit event `configUpdate` with current config object
+- When user submits configuration it should emit event `configReady` with config object
+- It should validate configuration to the best it can before allowing to submit the config
+
+### `ComposerDroppableComponent`
+
+- Selector: `orc-composer-droppable`
+- It will render droppable rectangular area for accepting dynamic components
+- When such component will be dropped it should emit event `componentDropped` with dynamic component
+
 ## Prior Art
 
 None
@@ -76,4 +122,4 @@ None
 ## Unresolved Questions and Bikeshedding
 
 - We need to agree how json configuration will be exposed to user. It can be done via output that is triggered when user clicks on `Generate` button or configuration is emitted every time it's changed.
-This can also be configurable via DI token.
+  This can also be configurable via DI token.
