@@ -15,6 +15,9 @@ It should expose component `<orc-composer>` that will render all UI controls:
 - `<orc-composer-components>` - will render list of all available components ready for dragging
 - `<orc-composer-canvas>` - will render area for dropping components and configure them
 - `<orc-composer-preview>` - will render currently configured components in live preview
+- `<orc-composer-config>` - will render JSON configuration being built
+- `<orc-composer-errors>` - will render all error from previous round of preview rendering
+- `<orc-composer-controls>` - will render buttons to copy/reset configuration JSON
 
 Those 3 components should also be exported to give more fine grained control over UI to end user.
 
@@ -60,6 +63,8 @@ We should use already existing library for drag-n-drop support (ex. [`angular-gr
 
 For UI we can use [Ant Design for Angular](https://github.com/NG-ZORRO/ng-zorro-antd) because it has rich set of high quality components.
 
+For JSON rendering and functions configuration we will use [monaco editor](https://microsoft.github.io/monaco-editor/index.html).
+
 ## Implementation
 
 Create module `ComposerModule` that will declare and export components:
@@ -68,6 +73,9 @@ Create module `ComposerModule` that will declare and export components:
 - `ComposerComponentsComponent`
 - `ComposerCanvasComponent`
 - `ComposerPreviewComponent`
+- `ComposerConfig`
+- `ComposerErrors`
+- `ComposerControls`
 
 Create private components for internal use:
 
@@ -76,13 +84,14 @@ Create private components for internal use:
 
 Communication between components may happen via inputs/outputs as well as via parent `ComposerComponent`.
 
-Any errors during live preview of configuration must be rendered in toast.
+Any errors during live preview of configuration must be rendered in `<orc-composer-errors>`.
 
 ### `ComposerComponent`
 
 - Selector: `orc-composer`
 - Will render `ComposerComponentsComponent`, `ComposerCanvasComponent` and `ComposerPreviewComponent` by default
 - Or will accept projected template with those components for custom layout
+- It should emit event `configUpdate` when config changes
 
 ### `ComposerComponentsComponent`
 
@@ -101,13 +110,28 @@ Any errors during live preview of configuration must be rendered in toast.
 - Selector: `orc-composer-preview`
 - It will render current json configuration via `orc-orchestrator`
 
+### `ComposerConfig`
+
+- Selector: `orc-composer-config`
+- It will render current json configuration
+
+### `ComposerErrors`
+
+- Selector: `orc-composer-errors`
+- It will render list of errors from last live render
+
+### `ComposerControls`
+
+- Selector: `orc-composer-controls`
+- It will render buttons to copy and reset JSON config
+
 ### `ComposerConfiguratorComponent`
 
 - Selector: `orc-composer-configurator`
 - It will render configuration controls for dynamic component provided from DI token `CONFIGURATION_COMPONENT`
 - When user updates configuration it should emit event `configUpdate` with current config object
-- When user submits configuration it should emit event `configReady` with config object
 - It should validate configuration to the best it can before allowing to submit the config
+- It should use `monaco-editor` for fields that are functions
 
 ### `ComposerDroppableComponent`
 
@@ -118,8 +142,3 @@ Any errors during live preview of configuration must be rendered in toast.
 ## Prior Art
 
 None
-
-## Unresolved Questions and Bikeshedding
-
-- We need to agree how json configuration will be exposed to user. It can be done via output that is triggered when user clicks on `Generate` button or configuration is emitted every time it's changed.
-  This can also be configurable via DI token.
