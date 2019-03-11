@@ -19,7 +19,7 @@ It should expose component `<orc-composer>` that will render all UI controls:
 - `<orc-composer-errors>` - will render all error from previous round of preview rendering
 - `<orc-composer-controls>` - will render buttons to copy/reset configuration JSON
 
-Those 3 components should also be exported to give more fine grained control over UI to end user.
+Those 6 components should also be exported to give more fine grained control over UI to end user.
 
 ### Example
 
@@ -73,9 +73,9 @@ Create module `ComposerModule` that will declare and export components:
 - `ComposerComponentsComponent`
 - `ComposerCanvasComponent`
 - `ComposerPreviewComponent`
-- `ComposerConfig`
-- `ComposerErrors`
-- `ComposerControls`
+- `ComposerConfigComponent`
+- `ComposerErrorsComponent`
+- `ComposerControlsComponent`
 
 Create private components for internal use:
 
@@ -110,17 +110,17 @@ Any errors during live preview of configuration must be rendered in `<orc-compos
 - Selector: `orc-composer-preview`
 - It will render current json configuration via `orc-orchestrator`
 
-### `ComposerConfig`
+### `ComposerConfigComponent`
 
 - Selector: `orc-composer-config`
 - It will render current json configuration
 
-### `ComposerErrors`
+### `ComposerErrorsComponent`
 
 - Selector: `orc-composer-errors`
 - It will render list of errors from last live render
 
-### `ComposerControls`
+### `ComposerControlsComponent`
 
 - Selector: `orc-composer-controls`
 - It will render buttons to copy and reset JSON config
