@@ -10,7 +10,7 @@ Currently all dynamic componentns in orchestrator are rendered via `ndc-dynamic`
 
 This usually does not create any issues (except for the increased DOM elements count) unless rendering some special components that are sensetive to it's children content such as `select` html tag which requires direct `option` html tags as it's children content to properly render options.
 
-And so such scenarios will break traditional nested dynamic rendering via `items` input and so far require a custom configuration to render children content manually bupassing our dynamic components rendering pipeline.
+And so such scenarios will break traditional nested dynamic rendering via `items` input and so far require a custom configuration to render children content manually bypassing our dynamic components rendering pipeline.
 
 ## Detailed Explanation
 
@@ -25,7 +25,7 @@ This on it's own is a breaking change as we will change `orc-render-item` compon
 
 ## Rationale and Alternatives
 
-One option is to keep rendering as is and in edge cases require custom rendering techniques (such as `html` and `text` config props of `html-tag` component). This is going to bring inconsistensies between different dynamic componetns configurations and also limit dynamic rendering capabilities of orchestrator as a whole thus it's not the best option and this RFC tries to mitigate it.
+One option is to keep rendering as is and in edge cases require custom rendering techniques (such as `html` and `text` config props of `html-tag` component). This is going to bring inconsistencies between different dynamic components configurations and also limit dynamic rendering capabilities of orchestrator as a whole thus it's not the best option and this RFC tries to mitigate it.
 
 ## Implementation
 
@@ -35,7 +35,7 @@ Create new `[orcRenderItem]` directive in `core` package which reflects the same
 
 Refactor all other places where `orc-render-item` component is being used by replacing it with `[orcRenderItem]` directive.
 
-All the changes for any packages MUST be of patch type since this change is considered a "fix" the dynamic rendering.
+All the changes for any packages MUST be of semver patch type since this change is considered a "fix" the dynamic rendering.
 
 For the next scheduled major release make sure to remove all deprecated API, including `orc-render-item` component.
 
