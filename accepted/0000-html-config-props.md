@@ -52,9 +52,3 @@ JS code during lifecycle of component to enable imerative use-cases
 ## Prior Art
 
 None
-
-## Unresolved Questions and Bikeshedding
-
-{{Write about any arbitrary decisions that need to be made (syntax, colors, formatting, minor UX decisions), and any questions for the proposal that have not been answered.}}
-
-{{THIS SECTION SHOULD BE REMOVED BEFORE RATIFICATION}}
