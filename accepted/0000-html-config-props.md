@@ -10,7 +10,7 @@ There is no way to set properties of HTML element via configuration at the momen
 [it's attributes](https://github.com/orchestratora/orchestrator/blob/8eb225cafa10ae71c5d5c0c00cfa0376459f90d9/libs/html-tag/src/lib/html-tag/html-tag-config.ts#L14)
 which is limited to strings only.
 
-It will be useful to allow to set properties of the HTML element which will exand the values
+It will be useful to allow to set properties of the HTML element which will expand the values
 allowed to be set on the element to any JS objects.
 
 ## Detailed Explanation
@@ -40,7 +40,7 @@ JS code during lifecycle of component to enable imerative use-cases
 
   class HtmlTagConfig {
     @OptionTypeFactory(() => record(string, unknown))
-    +attributes?: Record<string, unknown>;
+    +properties?: Record<string, unknown>;
   }
   ```
 
